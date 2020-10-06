@@ -36,111 +36,110 @@
 
 <body>
 
-<div id="clock"></div> </div>
+<div style="align-content: center;" id="clock"></div> </div>
 
 
   <table>
     <tbody>
+      <tr>
+        <tr>
+          <td class="click" id="1">1am<p class="userInput1"></p></td>
+        </tr>
+      </tr>
+    
+      <tr>
+        <td class="click" id="2">2am<p class="userInput2"></p></td>
+      </tr>
+    
+      <tr>
+        <td class="click" id="3">3am<p class="userInput3"></p></td>
+      </tr>
+    
+      <tr>
+        <td class="click" id="4">4am<p class="userInput4"></p></td>
+      </tr>
+    
+      <tr>
+        <td class="click" id="5">5am<p class="userInput5"></p></td>
+      </tr>
+    
+      <tr>
+        <td class="click" id="6">6am<p class="userInput6"></p></td>
+      </tr>
+    
+      <tr>
+        <td class="click" id="7">7am<p class="userInput7"></p></td>
+      </tr>
+    
+      <tr>
+        <td class="click" id="8">8am<p class="userInput8"></p></td>
+      </tr>
+    
+      <tr>
+        <td class="click" id="9">9am<p class="userInput9"></p></td>
+      </tr>
+    
+      <tr>
+        <td class="click" id="10">10am<p class="userInput10"></p></td>
+      </tr>
+    </td>
+      <tr>
+        <td class="click" id="11">11am<p class="userInput11"></p></td>
+      </tr>
+    </tbody>
+
   <tr>
-    <td id="click">12am</td><p id="userInputP"></p>
-  </tr>
+    <td class="click" id="12">12pm<br><p class="userInput12"></p></td>
   
   <tr>
     <tr>
-      <td>1pm</td>
+      <td class="click" id="13">1pm<p class="userInput13"></p></td>
     </tr>
   </tr>
 
   <tr>
-    <td>2pm</td>
+    <td class="click" id="14">2pm<p class="userInput14"></p></td>
   </tr>
 
   <tr>
-    <td>3pm</td>
+    <td class="click" id="15">3pm<p class="userInput15"></p></td>
   </tr>
 
   <tr>
-    <td>4pm</td>
+    <td class="click" id="16">4pm<p class="userInput16"></p></td>
   </tr>
 
   <tr>
-    <td>5pm</td>
+    <td class="click" id="17">5pm<p class="userInput17"></p></td>
   </tr>
 
   <tr>
-    <td>6pm</td>
+    <td class="click" id="18">6pm<p class="userInput18"></p></td>
   </tr>
 
   <tr>
-    <td>7pm</td>
+    <td class="click" id="19">7pm<p class="userInput19"></p></td>
   </tr>
 
   <tr>
-    <td>8pm</td>
+    <td class="click" id="20">8pm<p class="userInput20"></p></td>
   </tr>
 
   <tr>
-    <td>9pm</td>
+    <td class="click" id="21">9pm<p class="userInput21"></p></td>
   </tr>
 
   <tr>
-    <td>10pm</td>
+    <td class="click" id="22">10pm<p class="userInput22"></p></td>
   </tr>
 
   <tr>
-    <td>11pm</td>
+    <td class="click" id="23">11pm<p class="userInput23"></p></td>
   </tr>
 
   <tr>
-    <td>12pm</td>
+    <td class="click" id="24">12pm<p class="userInput24"></p></td>
   </tr>
-
-  <tr>
-    <tr>
-      <td>1am</td>
-    </tr>
-  </tr>
-
-  <tr>
-    <td>2am</td>
-  </tr>
-
-  <tr>
-    <td>3am</td>
-  </tr>
-
-  <tr>
-    <td>4am</td>
-  </tr>
-
-  <tr>
-    <td>5am</td>
-  </tr>
-
-  <tr>
-    <td>6am</td>
-  </tr>
-
-  <tr>
-    <td>7am</td>
-  </tr>
-
-  <tr>
-    <td>8am</td>
-  </tr>
-
-  <tr>
-    <td>9am</td>
-  </tr>
-
-  <tr>
-    <td>10am</td>
-  </tr>
-</td>
-  <tr>
-    <td>11am</td>
-  </tr>
-</tbody>
     </table>
 
   
@@ -153,15 +152,15 @@
     <script>
 
 
+//clock 
 
 
-var userInput = document.getElementById("click").value;
 
 const clock = document.getElementById('clock');
 
 function updateTime () {
   const now = moment();
-const humanReadable = now.format('hh:mma');
+const humanReadable = now.format('h:mma L');
 
 clock.textContent = humanReadable;
 
@@ -170,15 +169,158 @@ clock.textContent = humanReadable;
 setInterval(updateTime, 1000);
 
 
+// if (hour > 12) {
+  
+// }
+$('.click').each(function(){
+  var calHour = parseInt($(this).attr('id'))
+  var currentTime = moment().hours()
+   
+  if(calHour < currentTime)   {
+    $(this).addClass('past')
+  }
+  else if(calHour === currentTime){
+    $(this).removeClass('past').addClass('present');
+  }
+  else {
+    $(this).removeClass('past').removeClass('present').addClass('future');
+  }
+  
+})
 
-$('#click').click(function() {
-  prompt('Add to planner!');
+// prompt input 
+// var userInput = document.getElementById("click").value;
+
+$('.click').click(function() {
+  var userInput = prompt('Add to planner!');
+  
+  var time = $(this).attr('id')
+  localStorage.setItem(time, userInput);
 
 });
 
+
+// text display for each hour 
+
 function displayData() {
-document.getElementById('userInputP').innerHTML = userInput;
-};
+ document.getElementById('userInput1').innerHTML = userInput;
+ };
+ $('.userInput1').text(localStorage.getItem('1'))
+
+ function displayData() {
+ document.getElementById('userInput2').innerHTML = userInput;
+ };
+ $('.userInput2').text(localStorage.getItem('2'))
+
+ function displayData() {
+ document.getElementById('userInput3').innerHTML = userInput;
+ };
+ $('.userInput3').text(localStorage.getItem('3'))
+
+ function displayData() {
+ document.getElementById('userInput4').innerHTML = userInput;
+ };
+ $('.userInput4').text(localStorage.getItem('4'))
+
+ function displayData() {
+ document.getElementById('userInput5').innerHTML = userInput;
+ };
+ $('.userInput5').text(localStorage.getItem('5'))
+
+ function displayData() {
+ document.getElementById('userInput6').innerHTML = userInput;
+ };
+ $('.userInput6').text(localStorage.getItem('6'))
+
+ function displayData() {
+ document.getElementById('userInput7').innerHTML = userInput;
+ };
+ $('.userInput7').text(localStorage.getItem('7'))
+
+ function displayData() {
+ document.getElementById('userInput8').innerHTML = userInput;
+ };
+ $('.userInput8').text(localStorage.getItem('8'))
+
+ function displayData() {
+ document.getElementById('userInput9').innerHTML = userInput;
+ };
+ $('.userInput9').text(localStorage.getItem('9'))
+
+ function displayData() {
+ document.getElementById('userInput10').innerHTML = userInput;
+ };
+ $('.userInput10').text(localStorage.getItem('10'))
+
+ function displayData() {
+ document.getElementById('userInput11').innerHTML = userInput;
+ };
+ $('.userInput11').text(localStorage.getItem('11'))
+
+ function displayData() {
+ document.getElementById('userInput12').innerHTML = userInput;
+ };
+ $('.userInput12').text(localStorage.getItem('12'))
+
+ function displayData() {
+ document.getElementById('userInput13').innerHTML = userInput;
+ };
+ $('.userInput13').text(localStorage.getItem('13'))
+
+ function displayData() {
+ document.getElementById('userInput14').innerHTML = userInput;
+ };
+ $('.userInput14').text(localStorage.getItem('14'))
+
+ function displayData() {
+ document.getElementById('userInput15').innerHTML = userInput;
+ };
+ $('.userInput15').text(localStorage.getItem('15'))
+
+ function displayData() {
+ document.getElementById('userInput16').innerHTML = userInput;
+ };
+ $('.userInput16').text(localStorage.getItem('16'))
+
+ function displayData() {
+ document.getElementById('userInput17').innerHTML = userInput;
+ };
+ $('.userInput17').text(localStorage.getItem('17'))
+
+ function displayData() {
+ document.getElementById('userInput18').innerHTML = userInput;
+ };
+ $('.userInput18').text(localStorage.getItem('18'))
+
+ function displayData() {
+ document.getElementById('userInput19').innerHTML = userInput;
+ };
+ $('.userInput19').text(localStorage.getItem('19'))
+
+ function displayData() {
+ document.getElementById('userInput20').innerHTML = userInput;
+ };
+ $('.userInput20').text(localStorage.getItem('20'))
+
+ function displayData() {
+ document.getElementById('userInput21').innerHTML = userInput;
+ };
+ $('.userInput21').text(localStorage.getItem('21'))
+
+ function displayData() {
+ document.getElementById('userInput22').innerHTML = userInput;
+ };
+ $('.userInput22').text(localStorage.getItem('22'))
+
+ function displayData() {
+ document.getElementById('userInput23').innerHTML = userInput;
+ };
+ $('.userInput23').text(localStorage.getItem('23'))
+
+ function displayData() {
+ document.getElementById('userInput24').innerHTML = userInput;
+ };
+ $('.userInput24').text(localStorage.getItem('24'))
 
     </script>
   </body>
